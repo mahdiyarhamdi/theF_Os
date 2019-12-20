@@ -127,7 +127,7 @@ if(argint(0, &n) < 0)
     return -1;
 if(argint(1, &m) < 0)
     return -1;
-return chnagep(n,m);
+return changep(n,m);
 }
 
 int 
@@ -136,6 +136,6 @@ sys_changepo(void)
  int n;
 if(argint(0, &n) < 0)
     return -1;
-return chnagepo(n);
+return changepo(n);
 }
 

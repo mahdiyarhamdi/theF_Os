@@ -5,7 +5,8 @@
 int
 main(int argc, char *argv[])
 {
-  int i; 
+  int i;
+
   if(argc < 2){
     printf(2, "Usage: mkdir files...\n");
     exit();

@@ -6,7 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
-
+int po=0;
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
@@ -333,7 +333,7 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-int tmp = p->pid;
+
 if (po==1){
 	int min = 100000;
 	int tmp = 0;
@@ -347,9 +347,7 @@ if (po==1){
 		min = p->prcl;
 		tmp=tmp;
 		}
-}	
-	}
-    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if((p->state != RUNNABLE)||(p->pid != tmp))
         continue;
 	
@@ -368,6 +366,28 @@ if (po==1){
       // It should have changed its p->state before coming back.
       c->proc = 0;
     }
+}	
+	}else{
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if((p->state != RUNNABLE)||(p->pid))
+        continue;
+	
+      // Switch to chosen process.  It is the process's job
+      // to release ptable.lock and then reacquire it
+      // before jumping back to us.
+      c->proc = p;
+      p->prcl = p->prcl + p->pr;
+      switchuvm(p);
+      p->state = RUNNING;
+      cprintf("hi\n");
+      swtch(&(c->scheduler), p->context);
+      switchkvm();
+
+      // Process is done running for now.
+      // It should have changed its p->state before coming back.
+      c->proc = 0;
+    }
+}
     release(&ptable.lock);
 
   }
@@ -570,7 +590,7 @@ int
 changep(int pid,int pr)
 {
 struct proc *p = myproc();
-    int r=0;
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       // cprintf("##?  %d\n",p->parent->pid);
       if (p->pid == pid){
@@ -582,8 +602,11 @@ struct proc *p = myproc();
     return 0; 
 }
 int
-changep(int ipo)
+changepo(int ipo)
 {
 po=ipo;
     return 0; 
 }
+int
+getpo()
+{return po;}

@@ -23,7 +23,7 @@ int
 pipealloc(struct file **f0, struct file **f1)
 {
   struct pipe *p;
-  myproc()->count[4]=myproc()->count[4]+1;
+
   p = 0;
   *f0 = *f1 = 0;
   if((*f0 = filealloc()) == 0 || (*f1 = filealloc()) == 0)
