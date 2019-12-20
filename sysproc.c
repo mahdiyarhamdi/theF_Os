@@ -119,4 +119,14 @@ sys_getcount(void)
     return -1;
   return myproc()->count[n];
 }
+int 
+sys_changep(void)
+{
+ int n,m;
+if(argint(0, &n) < 0)
+    return -1;
+if(argint(1, &m) < 0)
+    return -1;
+
+}
 
