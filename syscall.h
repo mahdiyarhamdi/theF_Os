@@ -24,5 +24,5 @@
 #define SYS_getchild  23
 #define SYS_getcount  24
 #define SYS_changep  25
-#define SYS_changepo26 
-#define SYS_weitForChild  27
+#define SYS_changepo 26 
+#define SYS_waitForChild  27

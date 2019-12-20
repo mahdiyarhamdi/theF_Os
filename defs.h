@@ -9,6 +9,8 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
+struct timing ;
+
 
 // bio.c
 void            binit(void);
@@ -124,7 +126,7 @@ int             getchild(int);
 int		changep(int,int);
 int		changepo(int);
 int		getpo(void);
-int		waitForChild();
+int		waitForChild(struct timing *);
 
 
 

@@ -32,8 +32,10 @@ sys_wait(void)
 int
 sys_waitForChild(void)
 {
-  myproc()->count[3]=myproc()->count[3]+1;
-  return waitForChild();
+  myproc()->count[27]=myproc()->count[27]+1;
+     struct timing *ct;
+    argptr (0 , (void*)&ct ,sizeof(*ct));
+  return waitForChild(ct);
 }
 
 int

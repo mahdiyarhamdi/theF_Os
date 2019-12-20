@@ -57,7 +57,7 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
-  int count[25];               // Get count (2.2)
+  int count[28];               // Get count (2.2)
   int pr;
   int prcl;
 int cr;//creation time!
