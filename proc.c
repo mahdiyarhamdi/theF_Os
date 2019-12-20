@@ -88,6 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+	
 
   release(&ptable.lock);
 
@@ -332,17 +333,29 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+	int min = 100000;
+	int tmp = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->state != RUNNABLE)
+ 	if(p->state != RUNNABLE)
+       		continue;
+	if(p->prcl<min){
+		tmp = p->pid;
+		min = p->prcl;
+		tmp=tmp;
+		}	
+	}
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if((p->state != RUNNABLE)||(p->pid != tmp))
         continue;
-
+	
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
       c->proc = p;
+      p->prcl = p->prcl + p->pr;
       switchuvm(p);
       p->state = RUNNING;
-
+      cprintf("hi\n");
       swtch(&(c->scheduler), p->context);
       switchkvm();
 
@@ -547,3 +560,19 @@ getchild (int id){
     }
     return r; 
 } 
+
+int
+changep(int pid,int pr)
+{
+struct proc *p = myproc();
+    int r=0;
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      // cprintf("##?  %d\n",p->parent->pid);
+      if (p->pid == pid){
+  		p->pr=pr;
+		return 1;
+        // cprintf("@@@\n");
+      }
+    }
+    return 0; 
+}

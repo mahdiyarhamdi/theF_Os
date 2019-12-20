@@ -127,6 +127,6 @@ if(argint(0, &n) < 0)
     return -1;
 if(argint(1, &m) < 0)
     return -1;
-
+return chnagep(n,m);
 }
 
