@@ -1,5 +1,12 @@
 struct stat;
 struct rtcdate;
+struct timing{
+  int cr;//creation time!
+  int tr;//termina5tion timmmme haha!
+  int st;//sleeping time ! yuhhu!
+  int rt;//ready time! yidme!!!!!
+  int rnt;//runnig time !jooooooooooonam! 
+};
 
 // system calls
 int fork(void);

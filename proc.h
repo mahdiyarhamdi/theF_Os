@@ -32,6 +32,13 @@ struct context {
   uint ebp;
   uint eip;
 };
+struct timing{
+  int cr;//creation time!
+  int tr;//termina5tion timmmme haha!
+  int st;//sleeping time ! yuhhu!
+  int rt;//ready time! yidme!!!!!
+  int rnt;//runnig time !jooooooooooonam! 
+};
 
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
@@ -53,11 +60,11 @@ struct proc {
   int count[25];               // Get count (2.2)
   int pr;
   int prcl;
-	int crt;
-	int tt;
-	int st;
-	int rt;
-	int rnt;
+int cr;//creation time!
+  int tr;//termina5tion timmmme haha!
+  int st;//sleeping time ! yuhhu!
+  int rt;//ready time! yidme!!!!!
+  int rnt;//runnig time !jooooooooooonam! 
 };
 
 // Process memory is laid out contiguously, low addresses first:

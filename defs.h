@@ -124,6 +124,7 @@ int             getchild(int);
 int		changep(int,int);
 int		changepo(int);
 int		getpo(void);
+int		waitForChild();
 
 
 

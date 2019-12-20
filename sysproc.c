@@ -30,6 +30,13 @@ sys_wait(void)
 }
 
 int
+sys_waitForChild(void)
+{
+  myproc()->count[3]=myproc()->count[3]+1;
+  return waitForChild();
+}
+
+int
 sys_kill(void)
 {
   int pid;
