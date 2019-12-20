@@ -130,3 +130,12 @@ if(argint(1, &m) < 0)
 return chnagep(n,m);
 }
 
+int 
+sys_changepo(void)
+{
+ int n;
+if(argint(0, &n) < 0)
+    return -1;
+return chnagepo(n);
+}
+

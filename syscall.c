@@ -107,6 +107,7 @@ extern int sys_getppid(void);
 extern int sys_getchild(void);
 extern int sys_getcount(void);
 extern int sys_changep(void);
+extern int sys_changepo(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -134,6 +135,7 @@ static int (*syscalls[])(void) = {
 [SYS_getchild]   sys_getchild,
 [SYS_getcount]   sys_getcount,
 [SYS_changep]   sys_changep,
+[SYS_changepo]   sys_changepo,
 };
 
 void

@@ -333,8 +333,12 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+int tmp = p->pid;
+if (po==1){
 	int min = 100000;
 	int tmp = 0;
+
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
  	if(p->state != RUNNABLE)
        		continue;
@@ -342,7 +346,8 @@ scheduler(void)
 		tmp = p->pid;
 		min = p->prcl;
 		tmp=tmp;
-		}	
+		}
+}	
 	}
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if((p->state != RUNNABLE)||(p->pid != tmp))
@@ -574,5 +579,11 @@ struct proc *p = myproc();
         // cprintf("@@@\n");
       }
     }
+    return 0; 
+}
+int
+changep(int ipo)
+{
+po=ipo;
     return 0; 
 }
