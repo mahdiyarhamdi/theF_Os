@@ -60,7 +60,7 @@ struct proc {
   int count[28];               // Get count (2.2)
   int pr;
   int prcl;
-int cr;//creation time!
+  int cr;//creation time!
   int tr;//termina5tion timmmme haha!
   int st;//sleeping time ! yuhhu!
   int rt;//ready time! yidme!!!!!

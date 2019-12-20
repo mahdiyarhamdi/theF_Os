@@ -90,6 +90,27 @@ found:
   p->pid = nextpid++;
 	
 
+
+
+    struct proc* temp;
+  int min=-1;
+  temp = ptable.proc;
+  p->cr = ticks;
+  p->pr = 5;
+      
+  for(temp = ptable.proc; temp < &ptable.proc[NPROC]; temp++){
+  if(temp->state != RUNNABLE) 
+    continue;
+  else if(temp->prcl < min || min == -1)
+  min = temp->prcl;
+  }
+ 
+  p->prcl= min;
+   
+
+
+
+
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -264,8 +285,9 @@ exit(void)
 
   // Jump into the scheduler, never to return.
   curproc->state = ZOMBIE;
-  
+  curproc->tr = ticks;
   sched();
+  
   panic("zombie exit");
 }
 
