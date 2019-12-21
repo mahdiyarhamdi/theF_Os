@@ -1,66 +1,58 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "param.h"
+
 
 
 
 
 int
-main(int argc, char **argv)
+main()
 {
+changepo(2);
 struct timing t[10];
 
-int turnAroundTimeAvg = 0;
-int WaitingTimeAvg = 0;
-uint cbtAvg = 0;
+int tt = 0;
+int wt = 0;
+int CBT = 0;
 
-changePolicy(2);
-for (int id=0; id<10; id++){
+
+for (int k=0; k<10; k++){
     int f = fork();     
     if (f == 0) {
         int pid = getpid();
         
         for (int i = 0; i < 1000; i++)
         {
-            printf(1,"%d   [%d]: [%d]\n",id,pid,i);
+            printf(1,"[%d]: [%d]\n",pid,i);
         }
       
         exit();
     }
-    else if(f > 0){
-    //   printf(1,"%d",waitForChild(&t[id]));
- // printf(1,"creationTime : %d\nterminationTime : %d\nsleepiing : %d\nreadytime :%d\n",t[id].creationTime,t[id].terminationTime,t[id].sleepingTime,t[id].readyTime);
- 
+    else
+    {
+        waitForChild(&t[i]);
+        
     }
+    
 }
 
-    for(int i=0;i<25;i++){
-
-        printf(1,"%d",waitForChild(&t[i]));
-    }
 
 
-    printf(1,"\nQUANTOM : %d\n",QUANTUM);
+
+   
     for (int i = 0; i < 10; i++)
     {
-         printf(1,"\n\nProcess : %d \n->>>>>>>>>>>>>>>>>\ncreationTime : %d\nterminationTime : %d\nsleepiing : %d\nreadytime :%d\nrunningTime :%d\n\n"
-         ,i,t[i].creationTime,t[i].terminationTime,t[i].sleepingTime,t[i].readyTime,t[i].runningTime);
-         int turnAroundTime = t[i].terminationTime - t[i].creationTime;
-         int WaitingTime = t[i].readyTime;
-         int cbt = t[i].runningTime;
-         turnAroundTimeAvg+=turnAroundTime;
-         cbtAvg += cbt;
-         WaitingTimeAvg += WaitingTime;
-        printf(1,"____________________________________\nTurnAroundTime : %d\nWaitingTime : %d\nCBT : %d\n__________________________\n<----------------------------\n"
-        ,turnAroundTime,WaitingTime,cbt);
+         tt+=t[i].tr - t[i].cr;
+         CBT += t[i].rnt;
+         wt += t[i].rt;
+
     }
-    turnAroundTimeAvg/=10.0;
-    cbtAvg /= 10.0;
-    WaitingTimeAvg /= 10.0;
-    char str[] = "                                           ";
-    printf(1,"Final Results : for quantom %d\n%s -_-_-_-_-_-_-_-_-\n%sTT : %d\n%sWT : %d\n%sCBT : %d\n%s-_-_-_-_-_-_-_-_-\n_______________________________________________________________________________________________"
-,QUANTUM,str,str,turnAroundTimeAvg,str,WaitingTimeAvg,str,cbtAvg,str);
+    tt/=10;
+    CBT /= 10;
+    wt /= 10;
+   
+    printf(1,"TT : %d,WT : %d,CBT : %d",tt,wt,CBT);
 
 
 exit();

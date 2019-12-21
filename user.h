@@ -33,6 +33,10 @@ int uptime(void);
 int getppid(void);
 int getchild(int);
 int getcount(int);
+int changep(int,int);
+int changepo(int);
+int waitForChild(struct timing*);
+
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);

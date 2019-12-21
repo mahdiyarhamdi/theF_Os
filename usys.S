@@ -32,3 +32,7 @@ SYSCALL(uptime)
 SYSCALL(getppid)
 SYSCALL(getchild)
 SYSCALL(getcount)
+SYSCALL(changepo)
+SYSCALL(waitForChild)
+SYSCALL(changep)
+
