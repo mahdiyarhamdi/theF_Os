@@ -447,7 +447,7 @@ for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
 }	
 	}else{
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if((p->state != RUNNABLE)||(p->pid))
+      if((p->state != RUNNABLE))
         continue;
 	
       // Switch to chosen process.  It is the process's job
