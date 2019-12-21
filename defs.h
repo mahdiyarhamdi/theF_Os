@@ -127,7 +127,7 @@ int		changep(int,int);
 int		changepo(int);
 int		getpo(void);
 int		waitForChild(struct timing *);
-
+void    timeHandle();
 
 
 // swtch.S

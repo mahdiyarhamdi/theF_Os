@@ -688,3 +688,25 @@ po=ipo;
 int
 getpo()
 {return po;}
+void
+timeHandle(){
+    
+
+    
+    struct proc *p;
+    // Loop over process table looking for process with pid.
+  acquire(&ptable.lock);
+  //cprintf("name \t pid \t state \n");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if ( p->state == RUNNING )
+        p->rnt++;
+      else if ( p->state == RUNNABLE)
+        p->rt++;
+      else if ( p->state == SLEEPING)
+        p->st++;
+      
+        
+  }
+  
+  release(&ptable.lock);
+}
